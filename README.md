@@ -8,6 +8,11 @@ I created this project to gain hands-on experience with the QA testing process, 
 
 I used manual testing, Postman for API testing, and Playwright with JavaScript for browser automation.
 
+I selected the [Restful Booker Platform](https://automationintesting.online/) from [Automation in Testing](https://automationintesting.com/), an open-source practice application developed by Mark Winteringham for learning software testing and test automation.
+
+I chose it because it provides both a working website and documented APIs, allowing me to practice manual testing, API testing, and browser automation against the same application.
+
+
 **Application:** https://automationintesting.online/
 
 ## My Testing Approach
@@ -126,6 +131,20 @@ One of the most useful parts of this project was learning how to investigate fai
 I used Chrome DevTools to inspect network requests, HTTP status codes, and API responses. I also reproduced requests using Postman to compare the results with what I observed in the browser.
 
 I documented four issues during testing.
+
+### An Unexpected Finding
+
+One thing that surprised me during this project was how many API requests returned errors, even though the API documentation described the functionality they were supposed to support.
+
+Since this was a practice application specifically designed for software testing, I initially questioned whether I was making mistakes in my requests rather than assuming the application had defects.
+
+To investigate further, I compared successful and failed API responses in Postman, checked authentication and booking information, and used Chrome DevTools to inspect the requests being made through the website itself.
+
+For some operations, I was able to reproduce the same HTTP 500 errors through both Postman and the administrator interface. This gave me additional evidence that the failures were not limited to how I was sending requests in Postman.
+
+I documented the findings in separate bug reports, although I couldn't determine the exact root causes.
+
+This was one of the most valuable parts of the project because it taught me not to assume that an unexpected result is automatically an application defect. I learned to investigate the behavior, compare evidence, and document what I could actually verify.
 
 ### BUG-001: Reservation Pages Fail to Load
 
