@@ -4,7 +4,7 @@
 
 This is an independent QA testing project I completed using the Restful Booker Platform, a public hotel reservation practice application.
 
-I created this project to gain hands-on experience with the QA testing process, including understanding requirements, designing test cases, executing tests, investigating defects, and documenting results.
+I created this project to gain hands-on experience with the QA testing process, from understanding application functionality and creating test cases to executing tests, investigating issues, and documenting results.
 
 I used manual testing, Postman for API testing, and Playwright with JavaScript for browser automation.
 
@@ -14,18 +14,19 @@ I used manual testing, Postman for API testing, and Playwright with JavaScript f
 
 I started by exploring the application to understand how the room listings, reservation process, and administrator features worked.
 
-Since this was an independent project, I developed my own proposed functional requirements and acceptance criteria. I then used those criteria and the application's API documentation to create test scenarios and test cases.
+Since this was an independent project, I developed my own proposed functional requirements and acceptance criteria based on the application's functionality. I then used those criteria and the published API documentation to create test scenarios and test cases.
 
-My work included:
+Throughout the project, I completed the following:
 
-1. Developing requirements, acceptance criteria, and 15 test cases.
-2. Executing manual tests for room browsing and reservation functionality.
-3. Testing eight API requests using Postman and writing JavaScript assertions to validate responses.
-4. Automating three browser tests using Playwright.
-5. Using Postman's Collection Runner to execute multiple API requests automatically.
-6. Investigating unexpected behavior with Chrome DevTools and Postman.
-7. Documenting four issues with reproduction steps, test evidence, and screenshots.
-8. Configuring GitHub Actions to run my Playwright tests automatically.
+1. Developed functional requirements, acceptance criteria, and 15 test cases.
+2. Executed four manual test cases covering room navigation, room listings, and reservation functionality.
+3. Tested eight API requests using Postman, including authentication, room retrieval, and reservation management.
+4. Wrote JavaScript assertions to validate API responses and used collection variables to store authentication tokens and booking IDs.
+5. Used Postman's Collection Runner to execute four API requests automatically, with 10 assertions passing.
+6. Created three automated browser tests using Playwright and JavaScript.
+7. Used Chrome DevTools and Postman to investigate failed requests and compare frontend behavior with API responses.
+8. Documented four issues with reproduction steps, expected and actual results, and screenshots.
+9. Configured and successfully ran a GitHub Actions workflow for my Playwright tests.
 
 ## Testing Results
 
@@ -38,37 +39,42 @@ My work included:
 
 ## Manual Testing
 
-I created and executed four manual test cases covering booking navigation, room categories, Book Now buttons, and the Single room reservation interface.
+I created four manual test cases covering booking navigation, room categories, Book Now buttons, and the Single room reservation interface.
 
-Three tests passed. One failed because the reservation interface remained stuck on a loading screen.
+Three test cases passed, and one failed because the reservation page remained stuck on a loading screen.
 
-I also noticed a minor navigation issue where clicking Booking reached the correct section but did not position all the content clearly on the screen.
+I also noticed that clicking Booking reached the correct section but did not position all the room content clearly on the screen. I recorded this as a usability observation rather than a confirmed defect.
 
-[View Booking Navigation Screenshot](screenshots/TC-001-booking-navigation.png)
+**Manual testing evidence:**
 
-### Reservation Page Loading Issue
+[View screenshot: Booking navigation](screenshots/TC-001-booking-navigation.png)
 
-When I clicked Book Now, the reservation page did not finish loading.
+[View Manual Test Cases](manual-testing/test-cases.md)
 
-![Reservation page stuck on loading screen](screenshots/BUG-001-reservation-loading.png)
+[View Test Execution Results](manual-testing/test-execution.md)
 
-I investigated the issue through Chrome DevTools and then tested the room detail API independently in Postman, where the request also returned HTTP 500.
-
-[View Postman HTTP 500 Screenshot](screenshots/TC-004-postman-api-500.png)
-
-[View Manual Test Execution Results](manual-testing/test-execution.md)
+The reservation loading failure and its investigation are shown in BUG-001 below.
 
 ## API Testing with Postman
 
-I used Postman to test eight API requests covering administrator authentication, room retrieval, reservation creation, individual booking retrieval, updating, and deletion.
+I used Postman to test eight API requests covering:
 
-I also wrote JavaScript assertions to check HTTP status codes and response data. I used collection variables to store the authentication token and booking ID returned by requests.
+1. Valid administrator login
+2. Invalid administrator login
+3. Retrieving available rooms
+4. Retrieving bookings by room ID
+5. Creating a reservation
+6. Retrieving an individual reservation
+7. Updating an existing reservation
+8. Deleting an existing reservation
 
-Five API tests produced the expected results. Three requests returned HTTP 500 when attempting to retrieve, update, or delete an individual reservation.
+Five requests produced the expected results. Three returned HTTP 500 errors when retrieving, updating, or deleting individual bookings.
+
+I wrote JavaScript assertions to check HTTP status codes and response data. I also used collection variables to save authentication tokens and booking IDs for use in other requests.
 
 ### Postman Collection Runner
 
-I used Postman's Collection Runner to automatically execute four selected API requests in sequence:
+To practice automated API testing, I used Postman's Collection Runner to execute four selected requests in sequence:
 
 1. POST Admin Login
 2. GET All Rooms
@@ -77,122 +83,146 @@ I used Postman's Collection Runner to automatically execute four selected API re
 
 **Result: 10 assertions passed, 0 failed.**
 
-The three requests that previously returned HTTP 500 were excluded from this passing run and investigated separately.
+The three API requests that previously returned HTTP 500 were not included in this passing run. Their failures were investigated separately.
 
-![Postman Collection Runner with 10 passing assertions](screenshots/API-collection-run-10-passed.png)
+**Postman Collection Runner Results**
 
-The exported collection is also available for anyone who wants to review the requests, scripts, or assertions.
+![Postman Collection Runner showing 10 passing assertions](screenshots/API-collection-run-10-passed.png)
+
+[View screenshot: Full Postman Collection Runner results](screenshots/API-collection-run-10-passed.png)
+
+For anyone interested in reviewing the requests and JavaScript assertions, I also included the exported Postman collection.
 
 [View Postman Collection JSON](api-testing/Restful%20Booker%20-%20API%20Testing.postman_collection.json)
 
 ## Playwright Browser Automation
 
-I created three automated browser tests using Playwright and JavaScript.
+I created three browser automation tests using Playwright and JavaScript.
 
 The tests cover:
 
-1. Successful administrator login
+1. Successful administrator login using valid credentials
 2. Invalid administrator login and error message validation
-3. Verification that the Single, Double, and Suite room categories are displayed
+3. Verification that Single, Double, and Suite room categories are displayed
 
-**Local execution result: 3 passed, 0 failed in Chromium.**
+**Local execution result: 3 tests passed, 0 failed in Chromium.**
 
-I also configured a GitHub Actions workflow to run these Playwright tests automatically on pushes and pull requests.
+I also configured a GitHub Actions workflow to execute these tests automatically when changes are pushed to the repository or a pull request is created.
 
-The workflow was successfully executed on GitHub after publishing the repository.
+The workflow successfully completed after I published the project to GitHub.
 
-[View Playwright Test Script](automation/tests/restful-booker.spec.js)
+**Automation evidence:**
 
 [View Successful GitHub Actions Run](https://github.com/ProfessionalAngelC/Reservation-System-QA-Portfolio/actions/runs/45133466646)
+
+[View Playwright Test Script](automation/tests/restful-booker.spec.js)
 
 [View GitHub Actions Workflow](.github/workflows/playwright.yml)
 
 ## Bug Investigation
 
-One of the main things I practiced in this project was investigating failed functionality instead of only recording whether a test passed or failed.
+One of the most useful parts of this project was learning how to investigate failed functionality instead of only recording whether a test passed or failed.
 
-I used Chrome DevTools to inspect the network requests made by the application, including the request methods, URLs, responses, and HTTP status codes.
+I used Chrome DevTools to inspect network requests, HTTP status codes, and API responses. I also reproduced requests using Postman to compare the results with what I observed in the browser.
 
-I also reproduced several of these requests using Postman to compare the API responses with what I observed in the browser.
-
-I documented four issues.
+I documented four issues during testing.
 
 ### BUG-001: Reservation Pages Fail to Load
 
-The reservation interface remained stuck loading when selecting a room. The room detail API returned HTTP 500.
+When I clicked Book Now for a room, the reservation interface remained stuck on a loading screen.
 
-**Evidence:**
+I investigated the issue using Chrome DevTools and found that the room detail API returned HTTP 500. I then tested the same endpoint in Postman, where I received the same server error.
 
-[Reservation Loading Screenshot](screenshots/BUG-001-reservation-loading.png)
+The screenshots below show the problem in the browser and the corresponding API failure.
 
-[Postman HTTP 500 Screenshot](screenshots/TC-004-postman-api-500.png)
+**Screenshot 1: Reservation page stuck loading**
 
-[Full Bug Report](bug-reports/BUG-001.md)
+![Reservation page stuck on loading screen](screenshots/BUG-001-reservation-loading.png)
+
+**Screenshot 2: HTTP 500 response in Postman**
+
+![Postman showing HTTP 500 for the room detail API](screenshots/TC-004-postman-api-500.png)
+
+[View Full BUG-001 Report](bug-reports/BUG-001.md)
 
 ### BUG-002: Individual Booking Retrieval Returns HTTP 500
 
 I was able to retrieve bookings using the room ID filter, but requesting an individual booking using its booking ID returned HTTP 500.
 
-**Evidence:**
+I compared the responses from both endpoints to document the difference in behavior.
 
-[Successful Booking List Request](screenshots/BUG-002-booking-list-200.png)
+**Screenshot: Failed individual booking request in Postman**
 
-[Failed Individual Booking Request](screenshots/BUG-002-booking-get-500.png)
+![Postman GET request returning HTTP 500 for an individual booking](screenshots/BUG-002-booking-get-500.png)
 
-[Full Bug Report](bug-reports/BUG-002.md)
+**Additional evidence:**
+
+[View screenshot: Successful booking list request returning HTTP 200](screenshots/BUG-002-booking-list-200.png)
+
+[View Full BUG-002 Report](bug-reports/BUG-002.md)
 
 ### BUG-003: Unable to Update an Existing Reservation
 
-Updating a reservation using PUT returned HTTP 500 in Postman.
+I attempted to update an existing reservation using a PUT request in Postman, but the API returned HTTP 500.
 
-I also attempted the update through the administrator interface and used Chrome DevTools to confirm that the request returned the same server error.
+I also attempted the update through the administrator interface and inspected the network request using Chrome DevTools. The frontend operation produced the same server error.
 
-**Evidence:**
+**Screenshot: Failed PUT request in Chrome DevTools**
 
-[Postman PUT Request Failure](screenshots/BUG-003-booking-put-500.png)
+![Chrome DevTools showing HTTP 500 for the PUT request](screenshots/BUG-003-frontend-put-500.png)
 
-![Chrome DevTools showing the failed PUT request](screenshots/BUG-003-frontend-put-500.png)
+**Additional evidence:**
 
-[Full Bug Report](bug-reports/BUG-003.md)
+[View screenshot: Failed PUT request in Postman](screenshots/BUG-003-booking-put-500.png)
+
+[View Full BUG-003 Report](bug-reports/BUG-003.md)
 
 ### BUG-004: Unable to Delete an Existing Reservation
 
-Deleting an existing reservation returned HTTP 500 in Postman.
+I attempted to delete an existing reservation using Postman, but the DELETE request returned HTTP 500.
 
-I reproduced the failure through the administrator interface and inspected the DELETE request using Chrome DevTools.
+I reproduced the issue through the administrator interface and used Chrome DevTools to confirm that the request also failed there.
 
-**Evidence:**
+**Screenshot: Failed DELETE request in Chrome DevTools**
 
-[Postman DELETE Request Failure](screenshots/BUG-004-postman-delete-500.png)
+![Chrome DevTools showing HTTP 500 for the DELETE request](screenshots/BUG-004-frontend-delete-500.png)
 
-[Chrome DevTools DELETE Request Failure](screenshots/BUG-004-frontend-delete-500.png)
+**Additional evidence:**
 
-[Full Bug Report](bug-reports/BUG-004.md)
+[View screenshot: Failed DELETE request in Postman](screenshots/BUG-004-postman-delete-500.png)
 
-These issues were observed during testing of the public practice application. I documented the behavior and supporting evidence but did not confirm the underlying root causes.
+[View Full BUG-004 Report](bug-reports/BUG-004.md)
+
+### Investigation Notes
+
+These issues were observed while testing the public Restful Booker practice application.
+
+I documented the steps to reproduce each issue, the expected and actual behavior, and the evidence collected during testing.
+
+Although I reproduced several errors through both the browser and Postman, I did not confirm the underlying root causes.
 
 ## Tools Used
 
 | Tool | How I Used It |
 |---|---|
-| Chrome DevTools | Inspected network requests, API responses, and HTTP errors |
-| Postman | Tested APIs, wrote JavaScript assertions, used collection variables, and ran requests automatically |
-| Playwright | Created automated browser tests using JavaScript |
+| Chrome DevTools | Inspected network requests, API responses, request methods, and HTTP errors |
+| Postman | Tested API endpoints, wrote JavaScript assertions, used collection variables, and executed multiple requests with Collection Runner |
+| Playwright | Automated browser testing using JavaScript |
 | Visual Studio Code | Wrote test scripts and organized project documentation |
 | GitHub | Published the project and tracked changes |
-| GitHub Actions | Ran the Playwright test workflow automatically |
+| GitHub Actions | Executed automated Playwright tests through a CI workflow |
 
 ## Project Documentation
 
 | Document | Description |
 |---|---|
-| [Requirements and Acceptance Criteria](manual-testing/requirements-and-acceptance-criteria.md) | Functional requirements and acceptance criteria I independently developed |
-| [Test Cases](manual-testing/test-cases.md) | 15 test cases covering manual, API, and browser automation testing |
-| [Test Execution Results](manual-testing/test-execution.md) | Expected and actual results with pass or fail status |
-| [Bug Reports](bug-reports/) | Four documented issues with reproduction steps and evidence |
-| [Screenshots](screenshots/) | Screenshots of testing results and bug investigations |
+| [Requirements and Acceptance Criteria](manual-testing/requirements-and-acceptance-criteria.md) | Functional requirements and acceptance criteria I developed independently |
+| [Test Cases](manual-testing/test-cases.md) | 15 test cases covering manual, API, and automated browser testing |
+| [Test Execution Results](manual-testing/test-execution.md) | Expected and actual results, pass or fail status, and related defects |
+| [Bug Reports](bug-reports/) | Four documented issues with reproduction steps and supporting evidence |
+| [Screenshots](screenshots/) | Screenshots from manual testing, Postman, and Chrome DevTools |
 | [Postman Collection](api-testing/Restful%20Booker%20-%20API%20Testing.postman_collection.json) | Exported API requests and JavaScript assertions |
-| [Playwright Tests](automation/tests/restful-booker.spec.js) | Automated browser test script |
+| [Playwright Tests](automation/tests/restful-booker.spec.js) | JavaScript browser automation tests |
 
 ## Running the Playwright Tests
 
@@ -209,11 +239,11 @@ npx playwright test restful-booker.spec.js --project=chromium
 
 The tests run against the public Restful Booker Platform and do not require a local application server.
 
-The Postman collection can be imported into Postman using the JSON file in the `api-testing` folder.
+The Postman collection can also be imported into Postman using the JSON file in the `api-testing` folder.
 
 ## API Documentation
 
-I used the official Restful Booker Platform API documentation to review available endpoints, HTTP methods, authentication requirements, request bodies, and expected behavior.
+For API testing, I referenced the official Restful Booker Platform documentation to understand available endpoints, HTTP methods, request bodies, authentication requirements, and expected behavior.
 
 [Restful Booker Platform API Documentation](https://www.postman.com/automation-in-testing/restful-booker-collections/documentation/ci13ds3/restful-booker-platform)
 
@@ -223,16 +253,18 @@ This project was completed independently using a public practice application.
 
 The requirements and acceptance criteria were developed for portfolio purposes and were not provided by the application's development team.
 
-The application periodically resets its data, so some results may vary between executions.
+The application periodically resets its data, so test results may differ between executions.
 
-Several reservation operations returned HTTP 500 during testing, preventing successful completion of the full CRUD workflow. The underlying causes were not confirmed.
+Some reservation operations returned HTTP 500 under the tested conditions, preventing successful completion of the full CRUD workflow.
+
+The underlying causes of those failures were not confirmed.
 
 ## What I Learned
 
-This project helped me better understand how requirements, test cases, test execution, automation, and bug reporting connect.
+This project helped me better understand how requirements, acceptance criteria, test cases, execution results, automation, and bug reporting connect.
 
-I gained practical experience developing test cases, testing APIs, writing basic automation scripts, and documenting defects.
+I gained hands-on experience designing test cases, testing APIs, writing basic browser automation scripts, and investigating unexpected application behavior.
 
-One of the most useful parts was learning how to investigate failures using both Chrome DevTools and Postman. Instead of only reporting that a feature was broken, I practiced gathering evidence that could help someone else understand and reproduce the issue.
+One of the most useful parts was learning how to use Chrome DevTools and Postman together. Instead of only reporting that a feature did not work, I practiced gathering evidence that could help another tester or developer understand and reproduce the issue.
 
-I also gained experience running automated tests locally and through GitHub Actions.
+I also learned how to organize a QA project in GitHub and run automated browser tests through GitHub Actions.
