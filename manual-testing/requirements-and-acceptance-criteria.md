@@ -8,21 +8,23 @@
 
 ## 1. Purpose
 
-This document outlines the functional requirements and acceptance criteria used to guide testing of the Restful Booker Platform.
+This document outlines the functional requirements and acceptance criteria used to guide my testing of the Restful Booker Platform.
 
-I independently developed the acceptance criteria for portfolio purposes based on the application's functionality and my understanding of software testing practices. The API requirements were informed by the application's official documentation.
+I independently developed the acceptance criteria for portfolio purposes based on the application's functionality. For API testing, I also referenced the application's published documentation.
+
+The requirements focus on the functionality I selected for testing rather than the entire application.
 
 **API Documentation:** https://www.postman.com/automation-in-testing/restful-booker-collections/documentation/ci13ds3/restful-booker-platform
 
 ## 2. Application Overview
 
-Restful Booker Platform is a hotel reservation practice application that allows guests to browse rooms, access reservation functionality, and view hotel information. It also provides administrator functionality for managing rooms and bookings.
+Restful Booker Platform is a hotel reservation practice application that allows guests to browse rooms and make reservations. It also includes administrator functionality for managing rooms and bookings.
 
 ## 3. Functional Requirements
 
 ### REQ-001: Room Browsing and Navigation
 
-**Requirement:** Guests should be able to navigate to the room listings and view available room categories.
+**Requirement:** Guests should be able to navigate to the room listings and view the available room categories.
 
 **Acceptance Criteria:**
 
@@ -34,7 +36,7 @@ AC-003: Each room category includes a Book Now button.
 
 ### REQ-002: Room Reservations
 
-**Requirement:** Guests should be able to access the reservation interface for their selected room.
+**Requirement:** Guests should be able to open the reservation interface for their selected room.
 
 **Acceptance Criteria:**
 
@@ -42,35 +44,13 @@ AC-004: Clicking Book Now opens the reservation interface for the selected room.
 
 AC-005: The reservation interface loads successfully without remaining on a loading screen.
 
-AC-006: The reservation interface identifies the selected room.
-
-### REQ-003: Location and Contact
-
-**Requirement:** Guests should be able to access hotel location and contact information.
-
-**Acceptance Criteria:**
-
-AC-007: Clicking Location navigates to the location section.
-
-AC-008: Clicking Contact navigates to the Send Us a Message section.
-
-### REQ-004: Administrator Login
-
-**Requirement:** Administrators should be able to access the login page.
-
-**Acceptance Criteria:**
-
-AC-009: Clicking Admin opens the administrator login page.
-
-AC-010: The login page displays username and password fields.
-
 ### REQ-005: Administrator Authentication
 
-**Requirement:** The system should authenticate administrators using valid credentials and reject invalid login attempts.
+**Requirement:** The system should allow administrators to log in using valid credentials and reject invalid login attempts.
 
 **Acceptance Criteria:**
 
-AC-011: Valid credentials allow access to the Admin interface. Successful API authentication returns a nonempty token.
+AC-011: The administrator login page provides username and password fields. Valid credentials allow access to the administrator interface, and successful API authentication returns a nonempty token.
 
 AC-012: Invalid credentials are rejected. The frontend displays an error message, and the authentication API does not return a token.
 
@@ -94,6 +74,8 @@ AC-018: DELETE requests allow authorized users to delete an existing reservation
 
 ## 4. Scope and Assumptions
 
-The requirements and acceptance criteria in this document were developed independently for portfolio purposes. They are not official specifications provided by the application's development team.
+I independently developed these requirements and acceptance criteria for my QA portfolio. They are not official specifications provided by the application's development team.
 
-The acceptance criteria reflect proposed expected behavior based on application exploration and published API documentation. They serve as a reference for test case design, execution, and defect investigation.
+The criteria represent my selected testing scope and were used to design manual test cases, API tests, and automated browser tests.
+
+The original requirement and acceptance criteria IDs were retained to maintain consistency with the test cases and execution documentation.
