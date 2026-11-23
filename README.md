@@ -151,7 +151,7 @@ I also attempted the update through the administrator interface and used Chrome 
 
 [Postman PUT Request Failure](screenshots/BUG-003-booking-put-500.png)
 
-[Chrome DevTools PUT Request Failure](screenshots/BUG-003-frontend-put-500.png)
+![Chrome DevTools showing the failed PUT request](screenshots/BUG-003-frontend-put-500.png)
 
 [Full Bug Report](bug-reports/BUG-003.md)
 
